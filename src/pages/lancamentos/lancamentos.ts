@@ -1,3 +1,4 @@
+import { ControleProvider } from './../../providers/controle/controle';
 import { PipesModule } from './../../pipes/pipes.module';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ToastController, Events } from 'ionic-angular';
@@ -28,6 +29,7 @@ export class LancamentosPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public providerContas: ContasProvider,
+    public providerControle: ControleProvider,
     public modalCtrl: ModalController,
     private toast: ToastController,
     public providerLancamentos: LancamentosProvider

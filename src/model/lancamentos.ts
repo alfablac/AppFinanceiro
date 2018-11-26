@@ -4,6 +4,7 @@ export class Lancamentos{
     valor:number;
     data:string;
     conta:string;
+    controle:string;
     entradaSaida:string;
     pago:string;
   }

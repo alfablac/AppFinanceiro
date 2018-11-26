@@ -1,5 +1,6 @@
+import { LancamentosProvider } from './../../providers/lancamentos/lancamentos';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 
 
 @Component({
@@ -8,10 +9,23 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController,
+    public events: Events,
+    private dao: LancamentosProvider) {
+    
   }
 
+  saldo: number;
+
+
+  ngOnInit() {
+    this.dao.getSaldo((saldo) => {
+      this.saldo = saldo;
+    });
+    this.events.subscribe("saldo:updated", (saldo) => {
+      this.saldo = parseFloat(saldo);
+    });
+  }
 
   abrirSaldo(){
     

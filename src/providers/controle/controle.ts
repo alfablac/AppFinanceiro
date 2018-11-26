@@ -1,8 +1,8 @@
 import { Controle } from './../../model/controle';
-import { DatabaseProvider } from './../database/database';
-import { SQLiteObject } from '@ionic-native/sqlite';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { DatabaseProvider } from '../database/database';
 
 /*
   Generated class for the ControleProvider provider.
@@ -32,13 +32,13 @@ export class ControleProvider {
 
     .then((data: any) => {
       if(data.rows.length > 0){
-        let contas: any[] = [];
+        let controles: any[] = [];
 
         for(var i=0; i < data.rows.length; i++){
-          var conta = data.rows.item(i);
-          contas.push(conta);
+          var controle = data.rows.item(i);
+          controles.push(controle);
         }
-        return contas;
+        return controles;
 
       }else{
         return [];
@@ -51,11 +51,11 @@ export class ControleProvider {
   .catch((e) => console.error(e));
   }
 
-  insert(conta:Controle){
+  insert(controle:Controle){
     return this.dbProvider.getDB()
     .then((db: SQLiteObject) => {
     let sql = 'insert into controle (descricao) values (?)';
-    let data = [conta.descricao];
+    let data = [controle.descricao];
     return db.executeSql(sql, data)
   
     .catch((e) => console.error(e));

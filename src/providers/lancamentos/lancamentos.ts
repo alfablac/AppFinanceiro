@@ -130,8 +130,8 @@ export class LancamentosProvider {
    insert(lancamentos:Lancamentos){
     return this.dbProvider.getDB()
     .then((db: SQLiteObject) => {
-    let sql = 'insert into lancamentos (descricao, valor, data, conta, entradaSaida, pago) values (?, ?, ?, ?, ?, ?)';
-    let data = [lancamentos.descricao, lancamentos.valor, lancamentos.data, lancamentos.conta, lancamentos.entradaSaida, lancamentos.pago ];
+    let sql = 'insert into lancamentos (descricao, valor, data, conta, controle, entradaSaida, pago) values (?, ?, ?, ?, ?, ?, ?)';
+    let data = [lancamentos.descricao, lancamentos.valor, lancamentos.data, lancamentos.conta, lancamentos.controle, lancamentos.entradaSaida, lancamentos.pago ];
    
     return db.executeSql(sql, data)
   
@@ -165,8 +165,8 @@ export class LancamentosProvider {
   public update(classe:Lancamentos){
     return this.dbProvider.getDB()
     .then((db: SQLiteObject) => {
-    let sql = 'update lancamentos set descricao = ?, valor = ?, data = ?, conta = ?, entradaSaida = ?, pago = ? where id = ?';
-    let data = [classe.descricao, classe.valor, classe.data, classe.conta, classe.entradaSaida, classe.pago, classe.id];
+    let sql = 'update lancamentos set descricao = ?, valor = ?, data = ?, conta = ?, controle = ?, entradaSaida = ?, pago = ? where id = ?';
+    let data = [classe.descricao, classe.valor, classe.data, classe.conta, classe.controle, classe.entradaSaida, classe.pago, classe.id];
     return db.executeSql(sql, data)
   
     .catch((e) => console.error(e));
@@ -193,6 +193,7 @@ export class LancamentosProvider {
         dado.valor = item.valor;
         dado.data = item.data;
         dado.conta = item.conta;
+        dado.controle = item.controle;
         dado.entradaSaida = item.entradaSaida;
         dado.pago = item.pago;
         return dado;

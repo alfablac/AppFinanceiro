@@ -40,6 +40,17 @@
           </ion-option>
         </ion-select>
       </ion-item>
+
+        
+      <ion-item>
+        <ion-label stacked>Controle</ion-label>
+        <ion-select type="text" [(ngModel)]="classe.controle">
+          <ion-option *ngFor="let items of listaControles">
+            {{items.descricao}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
         <ion-label stacked>Pago</ion-label>
         <ion-checkbox [(ngModel)]="classe.pago"></ion-checkbox>

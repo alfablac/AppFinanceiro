@@ -1,3 +1,4 @@
+import { ControleProvider } from './../../providers/controle/controle';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { LancamentosProvider } from '../../providers/lancamentos/lancamentos';
@@ -23,17 +24,21 @@ export class ModalLancamentosPage {
 
   classe:Lancamentos;
   listaContas: any[] = [];
+  listaControles: any[] = [];
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public providerContas:ContasProvider,
+    public providerControles:ControleProvider,
     private toast:ToastController,
     private providerLancamentos:LancamentosProvider
   ) {
 
     this.classe = new Lancamentos();
+
     this.getAllContas();
+    this.getAllControles();
 
     if(this.navParams.data.id){
       this.providerLancamentos.get(this.navParams.data.id)
@@ -58,9 +63,9 @@ export class ModalLancamentosPage {
 
 
   salvar() {
-    this.salvarConta()
+    this.salvarLancamento()
       .then(() => {
-        this.toast.create({ message: 'lançamento salvo.', duration: 3000, position: 'botton' }).present();
+        this.toast.create({ message: 'Lançamento salvo.', duration: 3000, position: 'botton' }).present();
         this.navCtrl.pop();
         this.navCtrl.push(LancamentosPage);
       })
@@ -71,7 +76,7 @@ export class ModalLancamentosPage {
   }
 
 
-  private salvarConta() {
+  private salvarLancamento() {
    
     if (this.classe.id) {
       return this.providerLancamentos.update(this.classe);
@@ -81,13 +86,23 @@ export class ModalLancamentosPage {
       
   }
 
-
-
-
   public getAllContas(){
     this.providerContas.getAll()
     .then((result:any)=>{
       this.listaContas = result;
+
+    })
+    .catch(()=>{
+    this.toast.create({message: 'Erro ao carregar categorias', duration:3000, position: 'button'}).present();
+    })
+  }
+
+
+  
+  public getAllControles(){
+    this.providerControles.getAll()
+    .then((result:any)=>{
+      this.listaControles = result;
 
     })
     .catch(()=>{
