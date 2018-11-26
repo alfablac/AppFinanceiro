@@ -3,6 +3,8 @@ www
 .idea
 .temp
 .sass-cache
+.vscode
+.sourcemaps
 <%= appPath %>/bower_components
 coverage
 platforms
