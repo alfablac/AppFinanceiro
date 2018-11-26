@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Aplicativo de Finanças</ion-title>
+     <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+    <ion-card>
+        <!-- <img src="../../assets/imgs/financeiro.jpg"/> -->
+        <ion-card-content>
+          <ion-card-title>
+            Minhas Finanças
+            </ion-card-title>
+          <p>
+            Saldo: 
+          </p>
+
+          <p>
+            Último lançamento: 
+          </p>
+
+          <p>
+            Opções: 
+          </p>
+
+          <button ion-button round (click)="abrirSaldo()">Saldo</button>
+          <button ion-button color="secondary" round (click)="abrirContas()">Contas</button>
+          <button ion-button color="danger" round (click)="abrirLancamentos()">Lançamentos</button>
+          <button ion-button color="dark" round (click)="abrirControles()">Controles</button>
+        </ion-card-content>
+      </ion-card>
+</ion-content>
