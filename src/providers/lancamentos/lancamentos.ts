@@ -207,6 +207,35 @@ export class LancamentosProvider {
   .catch((e) => console.error(e));
   }
 
+  public getUltimo(){
+    return this.dbProvider.getDB()
+    .then((db: SQLiteObject) => {
+    let sql = 'select top 1 * from lancamentos';
+    return db.executeSql(sql, [])
+
+    .then((data:any) => {
+      if(data.rows.length > 0){
+        let item = data.rows.item(0);
+        let dado = new Lancamentos();
+        dado.id = item.id;
+        dado.descricao = item.descricao;
+        dado.valor = item.valor;
+        dado.data = item.data;
+        dado.conta = item.conta;
+        dado.controle = item.controle;
+        dado.entradaSaida = item.entradaSaida;
+        dado.pago = item.pago;
+        return dado;
+      }
+      return null;
+    })
+  
+    .catch((e) => console.error(e));
+
+    })
+  .catch((e) => console.error(e));
+  }
+
 
 }
 
